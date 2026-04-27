@@ -1,0 +1,14 @@
+{
+  "Title": "SbTween",
+  "Type": "library",
+  "Org": "resync",
+  "Ident": "sbtween",
+  "Schema": 1,
+  "IncludeSourceFiles": false,
+  "Resources": null,
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Mounts": null,
+  "IsStandaloneOnly": false,
+  "Metadata": {}
+}
