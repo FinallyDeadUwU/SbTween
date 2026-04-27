@@ -25,6 +25,10 @@ Sequences (inspirated by DoTween)
 Example Level. 
 > where is showcased every tween.
 
+How to use it?
+Example of basic cube movement.
+this.TweenMove( new Vector3(25,25,25), 3 ).SetEase( EaseType.Linear ).SetLoops(-1,true).Play();
+
 Shoutouts:
 Braxen (TweenManager) for inspiration.
 DoTween, GDTween for inspiration.
