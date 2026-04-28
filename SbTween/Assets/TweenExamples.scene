@@ -292,6 +292,81 @@
       "Children": []
     },
     {
+      "__guid": "9e754eff-11ac-46a9-bbc2-94276aff063e",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "TweenPlayerCube",
+      "Position": "-447.719116,-701.000183,73.9817963",
+      "Rotation": "0,0,-0.707106709,0.707106829",
+      "Scale": "0.617118835,0.617118835,0.617118835",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "08f6d173-5cb8-44ca-886f-e9f4beeb5922",
+          "__enabled": true,
+          "Flags": 0,
+          "BodyGroups": 18446744073709551615,
+          "CreateAttachments": false,
+          "LodOverride": null,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Materials": null,
+          "Model": "models/dev/box.vmdl",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderOptions": {
+            "GameLayer": true,
+            "OverlayLayer": false,
+            "BloomLayer": false,
+            "AfterUILayer": false
+          },
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "SbTween.SbTweenPlayer",
+          "__guid": "387ad3da-8b20-402d-ae2e-b363b048855d",
+          "__enabled": true,
+          "Flags": 0,
+          "_OnComplete": null,
+          "_OnStart": null,
+          "AutoPlay": true,
+          "ColorFrom": "1,1,1,1",
+          "ColorTo": "1,1,1,1",
+          "Delay": 0,
+          "Duration": 9.509999,
+          "Easing": "OutBounce",
+          "From": "-447.719116,-701.000183,73.9817963",
+          "GizmoDebug": true,
+          "Loops": -1,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "SLStrength": 1,
+          "SRStrength": 1,
+          "SSStrength": 1,
+          "To": "-447.718994,-895.340149,232.231857",
+          "Type": "Move",
+          "Yoyo": true
+        }
+      ],
+      "Children": []
+    },
+    {
       "__guid": "d6829cc6-c5e3-412a-81e7-dec24bfe99b3",
       "__version": 2,
       "Flags": 0,
@@ -1432,6 +1507,85 @@
               "Scale": 0.3,
               "TextScope": {
                 "Text": "Tween Location Shake",
+                "TextColor": "1,1,1,1",
+                "FontName": "Poppins",
+                "FontSize": 64,
+                "FontWeight": 800,
+                "FontItalic": false,
+                "FontVariantNumeric": "Normal",
+                "LineHeight": 1,
+                "LetterSpacing": 0,
+                "WordSpacing": 0,
+                "FilterMode": "Bilinear",
+                "FontSmooth": "Auto",
+                "Outline": {
+                  "Enabled": true,
+                  "Size": 4,
+                  "Color": "0,0,0,1"
+                },
+                "Shadow": {
+                  "Enabled": true,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                },
+                "OutlineUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,1,0,1"
+                },
+                "ShadowUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                }
+              },
+              "VerticalAlignment": "Center"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "c38c0047-4b4e-47dc-bfc3-8880d8131c1b",
+          "__version": 2,
+          "Flags": 0,
+          "Name": "Tween Player",
+          "Position": "-37.8881226,-1373.16418,-3.94709059E-05",
+          "Rotation": "0,0,-0.707106709,0.707106829",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkFlags": 0,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.TextRenderer",
+              "__guid": "7634ea94-2fb7-4814-b6b9-f6cdf72d9380",
+              "__enabled": true,
+              "Flags": 0,
+              "__version": 2,
+              "BlendMode": "Normal",
+              "FogStrength": 1,
+              "HorizontalAlignment": "Center",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "Scale": 0.3,
+              "TextScope": {
+                "Text": "Tween Player\n(created from editor)\n(preview in editor)\n",
                 "TextColor": "1,1,1,1",
                 "FontName": "Poppins",
                 "FontSize": 64,
@@ -3004,13 +3158,13 @@
           "SelectionSets": []
         }
       },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "68976409-abaf-4613-aea3-5f37aae1e08e"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },

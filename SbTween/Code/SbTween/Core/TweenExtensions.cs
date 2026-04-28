@@ -20,7 +20,7 @@ public static class TweenExtensions
 	// 3D VECTOR
 	public static BaseTween TweenMove( this GameObject obj, Vector3 target, float duration )
 	{
-		Vector3 start = Vector3.Zero;
+		Vector3 start = obj.WorldPosition;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -30,7 +30,7 @@ public static class TweenExtensions
 
 	public static BaseTween TweenMoveLocal( this GameObject obj, Vector3 target, float duration )
 	{
-		Vector3 start = Vector3.Zero;
+		Vector3 start = obj.LocalPosition;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -41,7 +41,7 @@ public static class TweenExtensions
 	// 3D ROTATION
 	public static BaseTween TweenRotate( this GameObject obj, Rotation target, float duration )
 	{
-		Rotation start = Rotation.Identity;
+		Rotation start = obj.WorldRotation;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -51,7 +51,7 @@ public static class TweenExtensions
 
 	public static BaseTween TweenRotateLocal( this GameObject obj, Rotation target, float duration )
 	{
-		Rotation start = Rotation.Identity;
+		Rotation start = obj.LocalRotation;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -62,7 +62,7 @@ public static class TweenExtensions
 	// 3D SCALE
 	public static BaseTween TweenScale( this GameObject obj, Vector3 target, float duration )
 	{
-		Vector3 start = Vector3.One;
+		Vector3 start = obj.LocalScale;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -73,7 +73,7 @@ public static class TweenExtensions
 	// RENDER
 	public static BaseTween TweenTint( this ModelRenderer mr, Color target, float duration )
 	{
-		Color start = Color.White;
+		Color start = mr.Tint;
 		var tween = new BaseTween( duration );
 		tween.Target = mr.GameObject;
 		return TweenManager.Instance.AddTween( tween
@@ -93,7 +93,7 @@ public static class TweenExtensions
 	// SHAKERS
 	public static BaseTween TweenShakeLocation( this GameObject obj, float duration, float strength = 10f )
 	{
-		Vector3 startPos = Vector3.Zero;
+		Vector3 startPos = obj.WorldPosition;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -108,7 +108,7 @@ public static class TweenExtensions
 
 	public static BaseTween TweenShakeRotation( this GameObject obj, float duration, float strength = 5f )
 	{
-		Rotation startRot = Rotation.Identity;
+		Rotation startRot = obj.WorldRotation;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween
@@ -123,7 +123,7 @@ public static class TweenExtensions
 
 	public static BaseTween TweenShakeScale( this GameObject obj, float duration, float strength = 0.2f )
 	{
-		Vector3 startScale = Vector3.One;
+		Vector3 startScale = obj.LocalScale;
 		var tween = new BaseTween( duration );
 		tween.Target = obj;
 		return TweenManager.Instance.AddTween( tween

@@ -8,6 +8,7 @@ public class BaseTween
 	// Core Settings 
 	public float Duration { get; set; }
 	public float Elapsed { get; private set; }
+	public float Delay { get; private set; }
 	public EaseType Ease { get; set; } = EaseType.Linear;
 	public GameObject Target { get; set; }
 
@@ -31,6 +32,22 @@ public class BaseTween
 	public BaseTween( float duration )
 	{
 		Duration = duration;
+	}
+
+	public BaseTween SetDelay( float seconds )
+	{
+		Delay = seconds;
+		return this;
+	}
+	public void Stop()
+	{
+		IsFinished = true;
+		IsPaused = true;
+
+		if ( TweenManager.Instance.IsValid() )
+		{
+			TweenManager.Instance.RemoveTween( this );
+		}
 	}
 
 	public void Update( float deltaTime )
@@ -89,7 +106,16 @@ public class BaseTween
 
 	// Playback 
 	public void Pause() => IsPaused = true;
-	public void Play() => IsPaused = false;
+	public void Play()
+	{
+		IsPaused = false;
+		IsFinished = false;
+
+		if ( TweenManager.Instance.IsValid() )
+		{
+			TweenManager.Instance.AddTween( this );
+		}
+	}
 	public void Kill() => IsFinished = true;
 	public void Reverse() => IsReversed = !IsReversed;
 	public void Reset()

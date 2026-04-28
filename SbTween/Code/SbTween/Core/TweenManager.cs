@@ -4,21 +4,23 @@ using System.Linq;
 
 namespace SbTween;
 
-public sealed class TweenManager : Component
+public sealed class TweenManager : Component, Component.ExecuteInEditor
 {
 	private static TweenManager _instance;
 	public static TweenManager Instance
 	{
 		get
 		{
-			if ( _instance.IsValid() ) return _instance;
-			_instance = Game.ActiveScene.GetAllComponents<TweenManager>().FirstOrDefault();
-			if ( _instance.IsValid() ) return _instance;
+			var activeScene = Game.ActiveScene;
+			if ( activeScene == null ) return null;
 
-			var go = new GameObject( true, "SbTween_Manager" );
-			_instance = go.Components.Create<TweenManager>();
+			var found = activeScene.GetAllComponents<TweenManager>().FirstOrDefault();
+			if ( found.IsValid() ) return found;
+
+			var go = activeScene.CreateObject();
+			go.Name = "SbTween_Manager";
 			go.Flags = GameObjectFlags.NotSaved | GameObjectFlags.Hidden;
-			return _instance;
+			return go.Components.Create<TweenManager>();
 		}
 	}
 
@@ -31,6 +33,14 @@ public sealed class TweenManager : Component
 		_activeTweens.Add( tween );
 		return tween;
 	}
+	public void RemoveTween( BaseTween tween )
+	{
+		if ( tween == null ) return;
+		if ( _activeTweens.Contains( tween ) )
+		{
+			_activeTweens.Remove( tween );
+		}
+	}
 
 	public void AddSequence( TweenSequence seq )
 	{
@@ -40,12 +50,15 @@ public sealed class TweenManager : Component
 
 	protected override void OnUpdate()
 	{
-		if ( _activeTweens.Count == 0 ) return;
+		if ( _activeTweens.Count == 0 && _activeSequences.Count == 0 ) return;
 
+		float dt = RealTime.Delta;
+		bool isAnyTweenMoving = false;
+
+		// --- Tweens ---
 		for ( int i = _activeTweens.Count - 1; i >= 0; i-- )
 		{
 			var tween = _activeTweens[i];
-
 			if ( tween == null || tween.IsFinished )
 			{
 				_activeTweens.RemoveAt( i );
@@ -54,10 +67,12 @@ public sealed class TweenManager : Component
 
 			if ( !tween.IsPaused )
 			{
-				tween.Update( RealTime.Delta );
+				tween.Update( dt );
+				isAnyTweenMoving = true;
 			}
 		}
 
+		// --- Sequences ---
 		for ( int i = _activeSequences.Count - 1; i >= 0; i-- )
 		{
 			var seq = _activeSequences[i];
@@ -67,6 +82,19 @@ public sealed class TweenManager : Component
 				continue;
 			}
 			seq.Update();
+			isAnyTweenMoving = true;
+		}
+
+		if ( isAnyTweenMoving && !Game.IsPlaying )
+		{
+			foreach ( var tween in _activeTweens )
+			{
+				if ( tween.Target.IsValid() )
+				{
+					tween.Target.Transform.Local = tween.Target.Transform.Local;
+					break;
+				}
+			}
 		}
 	}
 }
