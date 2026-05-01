@@ -11,16 +11,21 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 	{
 		get
 		{
-			var activeScene = Game.ActiveScene;
-			if ( activeScene == null ) return null;
+			if ( IsInstanceValid() == false )
+			{
+				var activeScene = Game.ActiveScene;
+				if ( activeScene == null ) return null;
 
-			var found = activeScene.GetAllComponents<TweenManager>().FirstOrDefault();
-			if ( found.IsValid() ) return found;
+				var found = activeScene.GetAllComponents<TweenManager>().FirstOrDefault();
+				if ( found.IsValid() ) return found;
 
-			var go = activeScene.CreateObject();
-			go.Name = "SbTween_Manager";
-			go.Flags = GameObjectFlags.NotSaved | GameObjectFlags.Hidden;
-			return go.Components.Create<TweenManager>();
+				var go = activeScene.CreateObject();
+				go.Name = "SbTween_Manager";
+				go.Flags = GameObjectFlags.NotSaved | GameObjectFlags.Hidden;
+				_instance = go.Components.Create<TweenManager>();
+			}
+
+			return _instance;
 		}
 	}
 
@@ -96,5 +101,11 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 				}
 			}
 		}
+	}
+
+	//THANKS ENZO (damien9709) for fixing this!
+	public static bool IsInstanceValid()
+	{
+		return _instance != null;
 	}
 }
