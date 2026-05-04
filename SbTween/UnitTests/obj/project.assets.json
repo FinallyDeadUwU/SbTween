@@ -1142,7 +1142,7 @@
       "projectName": "sbtween.unittest",
       "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\sbtween.unittest.csproj",
       "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\obj\\",
+      "outputPath": "c:\\users\\filip\\documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1161,6 +1161,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\tools\\Code\\Base Editor Library.csproj": {
@@ -1199,6 +1200,7 @@
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "MSTest.TestAdapter": {

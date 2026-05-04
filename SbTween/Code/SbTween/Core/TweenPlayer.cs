@@ -43,6 +43,12 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 	[Property, Group( "Settings" )] public EaseType Easing { get; set; } = EaseType.Linear;
 	[Property, Group( "Settings" )] public bool AutoPlay { get; set; } = true;
 
+	[Property, Group( "Settings" )]
+	public bool UseCurve { get; set; } = false;
+
+	[Property, Group( "Settings" ), ShowIf( nameof( UseCurve ), true )]
+	public Curve TweenCurve { get; set; } = Curve.Linear;
+
 
 	// EVENTS
 	[Property, Group( "Events" )] public Action _OnStart { get; set; }
@@ -207,7 +213,7 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 		Vector3 targetVal = reverse ? From : To;
 		Color targetColor = reverse ? ColorFrom : ColorTo;
 
-		return Type switch
+		var t = Type switch
 		{
 			TweenType.Move => GameObject.TweenMove( targetVal, Duration ),
 			TweenType.MoveLocal => GameObject.TweenMoveLocal( targetVal, Duration ),
@@ -222,6 +228,20 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 
 			_ => null
 		};
+
+		//Tween failed.
+		if ( t == null ) return null;
+
+		if ( UseCurve )
+		{
+			t.WithCurve( TweenCurve );
+		}
+		else
+		{
+			t.SetEase( Easing );
+		}
+
+		return t;
 	}
 }
 

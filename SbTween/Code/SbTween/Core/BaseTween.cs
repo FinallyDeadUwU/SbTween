@@ -10,7 +10,9 @@ public class BaseTween
 	public float Elapsed { get; private set; }
 	public float Delay { get; private set; }
 	public EaseType Ease { get; set; } = EaseType.Linear;
+	public Func<float, float> TimingFunction { get; set; }
 	public GameObject Target { get; set; }
+
 
 	// Looping 
 	public int Loops { get; private set; } = 0; // 0 = once, -1 = infinite
@@ -49,6 +51,10 @@ public class BaseTween
 			TweenManager.Instance.RemoveTween( this );
 		}
 	}
+	protected float GetEasedProgress( float p )
+	{
+		return TimingFunction != null ? TimingFunction( p ) : p;
+	}
 
 	public void Update( float deltaTime )
 	{
@@ -72,7 +78,17 @@ public class BaseTween
 
 		float progress = Math.Clamp( Elapsed / Duration, 0, 1 );
 
-		_onUpdate?.Invoke( Easing.Apply( Ease, progress ) );
+		float finalProgress; //Curve progress
+		if ( TimingFunction != null )
+		{
+			finalProgress = TimingFunction( progress );
+		}
+		else
+		{
+			finalProgress = Easing.Apply( Ease, progress );
+		}
+
+		_onUpdate?.Invoke( finalProgress );
 
 		if ( (!IsReversed && progress >= 1.0f) || (IsReversed && progress <= 0f) )
 		{
@@ -103,6 +119,11 @@ public class BaseTween
 	public BaseTween OnStart( Action a ) { _onStart = a; return this; }
 	public BaseTween OnUpdate( Action<float> a ) { _onUpdate = a; return this; }
 	public BaseTween OnComplete( Action a ) { _onComplete = a; return this; }
+	public BaseTween WithCurve( Curve curve )
+	{
+		TimingFunction = t => curve.Evaluate( t );
+		return this;
+	}
 
 	// Playback 
 	public void Pause() => IsPaused = true;
