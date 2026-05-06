@@ -11,17 +11,17 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Sandbox
 build_property.RootNamespace = Sandbox
-build_property.ProjectDir = C:\Users\Filip\Documents\s&box projects\s_box_defense\Libraries\SbTween\Code\
+build_property.ProjectDir = c:\users\filip\documents\s&box projects\hidethebody\Libraries\resync.sbtween\Code\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Filip\Documents\s&box projects\s_box_defense\Libraries\SbTween\Code
+build_property.MSBuildProjectDirectory = c:\users\filip\documents\s&box projects\hidethebody\Libraries\resync.sbtween\Code
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Filip/Documents/s&box projects/s_box_defense/Libraries/SbTween/Code/SbTween/Examples/SbetweenTest.razor]
+[c:/users/filip/documents/s&box projects/hidethebody/Libraries/resync.sbtween/Code/SbTween/Examples/SbetweenTest.razor]
 build_metadata.AdditionalFiles.TargetPath = U2JUd2VlblxFeGFtcGxlc1xTYmV0d2VlblRlc3QucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

@@ -159,6 +159,35 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 		foreach ( var t in targets ) t.Stop();
 	}
 
+	public void KillTweenOnObject( GameObject target, string id )
+	{
+		if ( !target.IsValid() || string.IsNullOrEmpty( id ) ) return;
+
+		var toKill = _activeTweens
+			.Where( t => t.Target == target && t.Id == id )
+			.ToList();
+
+		foreach ( var tween in toKill )
+		{
+			tween.Kill();
+			_activeTweens.Remove( tween );
+		}
+	}
+
+	public void KillAllTweensOnObject( GameObject target )
+	{
+		if ( !target.IsValid() ) return;
+
+		var toKill = _activeTweens
+			.Where( t => t.Target == target )
+			.ToList();
+
+		foreach ( var tween in toKill )
+		{
+			tween.Kill();
+			_activeTweens.Remove( tween );
+		}
+	}
 
 	//THANKS ENZO (damien9709) for fixing this!
 	public static bool IsInstanceValid()

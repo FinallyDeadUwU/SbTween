@@ -26,6 +26,18 @@ public static class TweenExtensions
 			TweenManager.Instance?.Play( id );
 	}
 
+	public static void KillTween( this GameObject self, string id )
+	{
+		if ( string.IsNullOrEmpty( id ) ) return;
+
+		TweenManager.Instance?.KillTweenOnObject( self, id );
+	}
+
+	public static void KillAllTweens( this GameObject self )
+	{
+		TweenManager.Instance?.KillAllTweensOnObject( self );
+	}
+
 
 	// TWEENS
 	public static BaseTween TweenMove( this Component self, Vector3 target, float duration ) => self.GameObject.TweenMove( target, duration );

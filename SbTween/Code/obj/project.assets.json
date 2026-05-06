@@ -33,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Code\\sbtween.csproj",
+      "projectUniqueName": "c:\\users\\filip\\documents\\s&box projects\\hidethebody\\Libraries\\resync.sbtween\\Code\\sbtween.csproj",
       "projectName": "sbtween",
-      "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Code\\sbtween.csproj",
+      "projectPath": "c:\\users\\filip\\documents\\s&box projects\\hidethebody\\Libraries\\resync.sbtween\\Code\\sbtween.csproj",
       "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\filip\\documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Code\\obj\\",
+      "outputPath": "C:\\users\\filip\\documents\\s&box projects\\hidethebody\\Libraries\\resync.sbtween\\Code\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,8 +59,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base Library.csproj": {
-              "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base Library.csproj"
+            "c:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base Library.csproj": {
+              "projectPath": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base Library.csproj"
             }
           }
         }
