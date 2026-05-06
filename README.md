@@ -27,7 +27,7 @@ Example Level.
 
 How to use it?
 Example of basic cube movement.
-this.TweenMove( new Vector3(25,25,25), 3 ).SetEase( EaseType.Linear ).SetLoops(-1,true).Play();
+this.TweenMove( new Vector3(25,25,25), 3 ).SetEase( EaseType.Linear ).SetLoops(-1,LoopType.Restart).Play();
 
 Shoutouts:
 Braxen (TweenManager) for inspiration.
