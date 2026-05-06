@@ -7,6 +7,27 @@ namespace SbTween;
 public static class TweenExtensions
 {
 	// Shortcuts (! this is really important otherwise you can't hookup tweeners to components)
+
+
+	// TIMELINE
+	public static void Pause( this Component self, string id = null )
+	{
+		if ( string.IsNullOrEmpty( id ) )
+			TweenManager.Instance?.Pause( self.GameObject );
+		else
+			TweenManager.Instance?.Pause( id );
+	}
+
+	public static void Play( this Component self, string id = null )
+	{
+		if ( string.IsNullOrEmpty( id ) )
+			TweenManager.Instance?.Play( self.GameObject );
+		else
+			TweenManager.Instance?.Play( id );
+	}
+
+
+	// TWEENS
 	public static BaseTween TweenMove( this Component self, Vector3 target, float duration ) => self.GameObject.TweenMove( target, duration );
 	public static BaseTween TweenMoveLocal( this Component self, Vector3 target, float duration ) => self.GameObject.TweenMoveLocal( target, duration );
 	public static BaseTween TweenRotateLocal( this Component self, Rotation target, float duration ) => self.GameObject.TweenRotateLocal( target, duration );

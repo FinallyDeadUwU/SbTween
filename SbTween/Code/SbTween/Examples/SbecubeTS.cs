@@ -7,6 +7,6 @@ public sealed class SbecubeTS : Component
 {
 	protected override void OnStart()
 	{
-		this.TweenScale( new Vector3( 0.5f, 1f, 0.5f ),0.5f ).SetLoops(-1,true).SetEase(EaseType.InBounce).Play();
+		this.TweenScale( new Vector3( 0.5f, 1f, 0.5f ),0.5f ).SetLoops(-1,LoopType.YoYo).SetEase(EaseType.InBounce).Play();
 	}
 }

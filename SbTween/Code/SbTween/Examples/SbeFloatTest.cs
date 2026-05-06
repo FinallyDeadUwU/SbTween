@@ -10,6 +10,6 @@ public sealed class SbeFloatTest : Component
 
 	protected override void OnStart()
 	{
-		this.GameObject.TweenFloat( 0.18f, 0.46f, 0.5f, ( val ) => HO.Width = val ).SetEase(EaseType.Linear).SetLoops(-1, true);
+		this.GameObject.TweenFloat( 0.18f, 0.46f, 0.5f, ( val ) => HO.Width = val ).SetEase(EaseType.Linear).SetLoops(-1, LoopType.YoYo);
 	}
 }

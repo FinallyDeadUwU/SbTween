@@ -9,7 +9,7 @@ public sealed class SBECubeTL : Component
 
 	protected override void OnStart()
 	{
-		this.TweenMove( vectorUP, 3 ).SetEase( EaseType.Linear ).SetLoops(-1,true).Play();
+		this.TweenMove( vectorUP, 3 ).SetEase( EaseType.Linear ).SetLoops(-1, LoopType.YoYo ).Play();
 	}
 	
 }

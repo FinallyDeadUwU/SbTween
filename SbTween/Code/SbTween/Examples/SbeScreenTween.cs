@@ -9,7 +9,7 @@ public sealed class SbeScreenTween : Component
 
 	protected override void OnStart()
 	{
-		SP.TweenOpacity(0,1).SetLoops( -1, true ).Play();
-		SP.TweenSize(1.4f, 1).SetLoops( -1, true ).Play();
+		SP.TweenOpacity(0,1).SetLoops( -1, LoopType.YoYo ).Play();
+		SP.TweenSize(1.4f, 1).SetLoops( -1, LoopType.YoYo ).Play();
 	}
 }

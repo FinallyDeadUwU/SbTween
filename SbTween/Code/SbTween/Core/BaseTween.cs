@@ -12,12 +12,13 @@ public class BaseTween
 	public EaseType Ease { get; set; } = EaseType.Linear;
 	public Func<float, float> TimingFunction { get; set; }
 	public GameObject Target { get; set; }
+	public string Id { get; set; }
 
 
 	// Looping 
-	public int Loops { get; private set; } = 0; // 0 = once, -1 = infinite
+	public LoopType LoopMode { get; set; } = LoopType.Restart;
+	public int Loops { get; private set; } = 0; // 0 = once, -1 = infinity.
 	private int _loopsDone = 0;
-	public bool IsYoyo { get; private set; } // if true, flips direction every loop
 
 	// State 
 	public bool IsFinished { get; private set; }
@@ -27,6 +28,7 @@ public class BaseTween
 	// Events
 	private Action _onStart;
 	private Action _onComplete;
+	private Action _onLoop;
 	private Action<float> _onUpdate;
 
 	private bool _hasStarted = false;
@@ -39,6 +41,12 @@ public class BaseTween
 	public BaseTween SetDelay( float seconds )
 	{
 		Delay = seconds;
+		return this;
+	}
+
+	public BaseTween SetId( string id )
+	{
+		Id = id;
 		return this;
 	}
 	public void Stop()
@@ -60,15 +68,16 @@ public class BaseTween
 	{
 		if ( IsFinished || IsPaused ) return;
 
+		if ( Delay > 0 )
+		{
+			Delay -= deltaTime;
+			return;
+		}
+
 		if ( !_hasStarted )
 		{
 			_onStart?.Invoke();
 			_hasStarted = true;
-		}
-
-		if ( Elapsed == 0 && !IsReversed && _loopsDone == 0 )
-		{
-			_onStart?.Invoke();
 		}
 
 		if ( IsReversed )
@@ -77,26 +86,25 @@ public class BaseTween
 			Elapsed += deltaTime;
 
 		float progress = Math.Clamp( Elapsed / Duration, 0, 1 );
+		float finalProgress = TimingFunction != null ? TimingFunction( progress ) : Easing.Apply( Ease, progress );
 
-		float finalProgress; //Curve progress
-		if ( TimingFunction != null )
+		if ( LoopMode == LoopType.Incremental )
 		{
-			finalProgress = TimingFunction( progress );
+			_onUpdate?.Invoke( finalProgress + _loopsDone );
 		}
 		else
 		{
-			finalProgress = Easing.Apply( Ease, progress );
+			_onUpdate?.Invoke( finalProgress );
 		}
-
-		_onUpdate?.Invoke( finalProgress );
 
 		if ( (!IsReversed && progress >= 1.0f) || (IsReversed && progress <= 0f) )
 		{
 			if ( Loops == -1 || _loopsDone < Loops )
 			{
 				_loopsDone++;
+				_onLoop?.Invoke();
 
-				if ( IsYoyo )
+				if ( LoopMode == LoopType.YoYo )
 				{
 					IsReversed = !IsReversed;
 				}
@@ -115,7 +123,13 @@ public class BaseTween
 
 	// Chaining Method
 	public BaseTween SetEase( EaseType ease ) { Ease = ease; return this; }
-	public BaseTween SetLoops( int loops, bool yoyo = false ) { Loops = loops; IsYoyo = yoyo; return this; }
+	public BaseTween SetLoops( int loops, LoopType type = LoopType.Restart )
+	{
+		Loops = loops;
+		LoopMode = type;
+		return this;
+	}
+
 	public BaseTween OnStart( Action a ) { _onStart = a; return this; }
 	public BaseTween OnUpdate( Action<float> a ) { _onUpdate = a; return this; }
 	public BaseTween OnComplete( Action a ) { _onComplete = a; return this; }
@@ -146,4 +160,11 @@ public class BaseTween
 		IsPaused = true;
 		_hasStarted = false;
 	}
+}
+
+public enum LoopType
+{
+	Restart,    // 0 to 1, 0 -> 1
+	YoYo,       // 0 to 1 to 0
+	Incremental // 0 to 1, then 1 -> 2, then 2 -> 3 etc etc.
 }

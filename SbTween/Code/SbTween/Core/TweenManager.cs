@@ -32,7 +32,23 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 	public T AddTween<T>( T tween ) where T : BaseTween
 	{
 		if ( tween == null ) return null;
-		_activeTweens.Add( tween );
+
+		if ( !string.IsNullOrEmpty( tween.Id ) )
+		{
+			var existing = _activeTweens
+						.Where( t => t.Id == tween.Id && t != tween )
+						.ToList();
+
+			foreach ( var t in existing )
+			{
+				t.Stop();
+				Log.Warning( "[SbTween] - Tween (" + t.Target + ") won't be played because id: " + t.Id + ", already exists. Use different id for this tween." );
+			}
+		}
+
+		if ( !_activeTweens.Contains( tween ) ) //If multiple same tweens are on the object it makes them faster and faster.
+			_activeTweens.Add( tween );
+
 		return tween;
 	}
 	public void RemoveTween( BaseTween tween )
@@ -99,6 +115,50 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 			}
 		}
 	}
+
+	// TIMELINE
+	public void Pause( string id )
+	{
+		if ( string.IsNullOrEmpty( id ) ) return;
+		var targets = _activeTweens.Where( t => t.Id == id ).ToList();
+		foreach ( var t in targets ) t.Pause();
+	}
+
+	public void Pause( GameObject target )
+	{
+		if ( target == null ) return;
+		var targets = _activeTweens.Where( t => t.Target == target ).ToList();
+		foreach ( var t in targets ) t.Pause();
+	}
+
+	public void Play( string id )
+	{
+		if ( string.IsNullOrEmpty( id ) ) return;
+		var targets = _activeTweens.Where( t => t.Id == id ).ToList();
+		foreach ( var t in targets ) t.Play();
+	}
+
+	public void Play( GameObject target )
+	{
+		if ( target == null ) return;
+		var targets = _activeTweens.Where( t => t.Target == target ).ToList();
+		foreach ( var t in targets ) t.Play();
+	}
+
+	public void Stop( string id )
+	{
+		if ( string.IsNullOrEmpty( id ) ) return;
+		var targets = _activeTweens.Where( t => t.Id == id ).ToList();
+		foreach ( var t in targets ) t.Stop();
+	}
+
+	public void Stop( GameObject target )
+	{
+		if ( target == null ) return;
+		var targets = _activeTweens.Where( t => t.Target == target ).ToList();
+		foreach ( var t in targets ) t.Stop();
+	}
+
 
 	//THANKS ENZO (damien9709) for fixing this!
 	public static bool IsInstanceValid()

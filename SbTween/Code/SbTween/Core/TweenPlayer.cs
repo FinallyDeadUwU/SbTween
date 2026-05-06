@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Services;
 using System;
 
 namespace SbTween;
@@ -19,16 +20,29 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 	// SETUP
 	[Property, Group( "Setup" )] public TweenType Type { get; set; } = TweenType.Move;
 
-	[Property, Group( "Setup" ), HideIf( nameof( Type ), TweenType.Tint )] public Vector3 From { get; set; }
-	[Property, Group( "Setup" ), HideIf( nameof( Type ), TweenType.Tint )] public Vector3 To { get; set; }
+
+	// COLOR
+	[Property, Group( "Setup" ), ShowIf( nameof( IsVector ), true )] public Vector3 From { get; set; }
+	[Property, Group( "Setup" ), ShowIf( nameof( IsVector ), true )] public Vector3 To { get; set; }
 
 	[Property, Group( "Setup" ), ShowIf( nameof( Type ), TweenType.Tint )] public Color ColorFrom { get; set; } = Color.White;
 	[Property, Group( "Setup" ), ShowIf( nameof( Type ), TweenType.Tint )] public Color ColorTo { get; set; } = Color.White;
 
-	[Property, Group( "Setup" ), ShowIf( nameof( Type ), TweenType.ShakeLocation)] public float SLStrength { get; set; } = 1.0f;
-	[Property, Group( "Setup" ), ShowIf( nameof( Type ), TweenType.ShakeRotation)] public float SRStrength { get; set; } = 1.0f;
-	[Property, Group( "Setup" ), ShowIf( nameof( Type ), TweenType.ShakeScale)] public float SSStrength { get; set; } = 1.0f;
+	// SHAKE
+	[Property, Group( "Setup" ), ShowIf( nameof( IsShake ), true )] public float Strength { get; set; } = 1.0f;
 
+	// SPIRAL
+	[Property, Group( "Setup" ), ShowIf( nameof(IsCircularOrSpiral ), true )] public Vector3 Axis { get; set; } = Vector3.Up * 100f;
+
+	[Property, Group( "Setup" ), ShowIf( nameof( IsCircularOrSpiral ), true )] public float Speed { get; set; } = 1f;
+
+	[Property, Group( "Setup" ), ShowIf( nameof( IsCircularOrSpiral ), true )] public float Frequency { get; set; } = 5f;
+
+	[Property, Group( "Setup" ), ShowIf( nameof( IsCircularOrSpiral ), true )] public float Range { get; set; } = 5f;
+
+	// In Circle
+	[Property, Group( "Setup" ), ShowIf( nameof( Type ), TweenType.InCircle )] public bool Snapping { get; set; } = false;
+	
 
 	// SETTINGS
 	[Property, Group( "Settings" )] public float Duration { get; set; } = 1.0f;
@@ -38,10 +52,11 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 	[Title( "Loops (0 = Once, -1 = Infinite)" )]
 	public int Loops { get; set; } = 0;
 
-	[Property, Group( "Settings" )] public bool Yoyo { get; set; } = false;
+	[Property, Group( "Setup" )] public LoopType LoopMode { get; set; } = LoopType.Restart;
 
 	[Property, Group( "Settings" )] public EaseType Easing { get; set; } = EaseType.Linear;
 	[Property, Group( "Settings" )] public bool AutoPlay { get; set; } = true;
+	[Property, Group( "Settings" )] public string TweenID { get; set; } = "";
 
 	[Property, Group( "Settings" )]
 	public bool UseCurve { get; set; } = false;
@@ -56,11 +71,18 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 	[Property, Group( "Debug" )] public bool GizmoDebug { get; set; } = true;
 
 
+	// Editor stuff.
+	[Hide] public bool IsCircularOrSpiral => Type == TweenType.InCircle || Type == TweenType.Spiral;
+	[Hide] public bool IsShake => Type == TweenType.ShakeScale || Type == TweenType.ShakeLocation || Type == TweenType.ShakeRotation;
+	[Hide] public bool IsVector => Type == TweenType.Move || Type == TweenType.MoveLocal || Type == TweenType.Rotate || Type == TweenType.RotateLocal || Type == TweenType.Scale;
+
 	private BaseTween _currentTween;
 	private TweenSnapshot _initialState;
 	private int _completedLoops = 0;
 	private bool _isReversing = false;
-
+	private Vector3 _incrementalFrom;
+	private Vector3 _incrementalTo;
+	private bool _isIncrementalStarted = false;
 	protected override void OnStart()
 	{
 		if ( Game.IsPlaying && AutoPlay )
@@ -123,19 +145,45 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 			_initialState.Capture( GameObject );
 		}
 
-		ResetToState( !_isReversing );
+		if ( LoopMode == LoopType.Incremental && !IsCircularOrSpiral )
+		{
+			if ( !_isIncrementalStarted )
+			{
+				_incrementalFrom = From;
+				_incrementalTo = To;
+				_isIncrementalStarted = true;
+			}
+		}
+		else
+		{
+			_isIncrementalStarted = false;
+		}
+
+		if ( !IsCircularOrSpiral && LoopMode != LoopType.Incremental )
+		{
+			ResetToState( !_isReversing );
+		}
 
 		GameObject.Transform.ClearInterpolation();
 
 		_currentTween = CreateTweenInstance( _isReversing );
+		if ( _currentTween == null ) return;
 
 		_currentTween
 			.SetDelay( Delay )
 			.SetEase( Easing )
-			.OnStart( () => {
-				_OnStart?.Invoke();
-			} )
-			.OnComplete( () => HandleCompletion() );
+			.OnStart( () => _OnStart?.Invoke() );
+
+		if ( LoopMode == LoopType.Incremental && !IsCircularOrSpiral )
+		{
+			_currentTween.OnComplete( () => HandleCompletion() );
+		}
+		else
+		{
+
+			_currentTween.SetLoops( Loops, LoopMode );
+			_currentTween.OnComplete( () => _OnComplete?.Invoke() );
+		}
 
 		_currentTween.Play();
 	}
@@ -145,15 +193,14 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 		StopInternal();
 		_completedLoops = 0;
 		_isReversing = false;
+		_isIncrementalStarted = false;
 
 		if ( _initialState != null )
 		{
 			_initialState.Restore();
 		}
-		else
-		{
-			ResetToState( true );
-		}
+
+		_initialState = null;
 	}
 
 	private void StopInternal()
@@ -166,24 +213,46 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 	{
 		_OnComplete?.Invoke();
 
-		if ( Yoyo )
-		{
-			_isReversing = !_isReversing;
-			if ( !_isReversing && Loops != -1 ) _completedLoops++;
+		bool hasMoreLoops = Loops == -1 || _completedLoops < Loops;
 
-			if ( Loops == -1 || _completedLoops < Loops || _isReversing )
-			{
-				Play();
-			}
-		}
-		else
+		switch ( LoopMode )
 		{
-			if ( Loops == -1 || _completedLoops < Loops )
-			{
-				if ( Loops != -1 ) _completedLoops++;
-				_isReversing = false;
-				Play();
-			}
+			case LoopType.YoYo:
+				_isReversing = !_isReversing;
+
+				if ( !_isReversing && Loops != -1 )
+					_completedLoops++;
+
+				if ( hasMoreLoops || _isReversing )
+				{
+					Play();
+				}
+				break;
+
+			case LoopType.Incremental:
+				if ( hasMoreLoops )
+				{
+					if ( Loops != -1 ) _completedLoops++;
+					if ( IsVector )
+					{
+						var delta = _incrementalTo - _incrementalFrom;
+						_incrementalFrom = _incrementalTo;
+						_incrementalTo += delta;
+					}
+
+					_isReversing = false;
+					Play();
+				}
+				break;
+
+			case LoopType.Restart:
+				if ( hasMoreLoops )
+				{
+					if ( Loops != -1 ) _completedLoops++;
+					_isReversing = false;
+					Play();
+				}
+				break;
 		}
 	}
 
@@ -210,8 +279,12 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 
 	private BaseTween CreateTweenInstance( bool reverse )
 	{
-		Vector3 targetVal = reverse ? From : To;
+		Vector3 startVal = (LoopMode == LoopType.Incremental && _isIncrementalStarted) ? _incrementalFrom : From;
+		Vector3 endVal = (LoopMode == LoopType.Incremental && _isIncrementalStarted) ? _incrementalTo : To;
+		Vector3 targetVal = reverse ? startVal : endVal;
+
 		Color targetColor = reverse ? ColorFrom : ColorTo;
+		float effectiveSpeed = reverse ? -Speed : Speed;
 
 		var t = Type switch
 		{
@@ -222,23 +295,28 @@ public sealed class SbTweenPlayer : Component, Component.ExecuteInEditor
 			TweenType.Scale => GameObject.TweenScale( targetVal, Duration ),
 			TweenType.Tint => Components.Get<ModelRenderer>()?.TweenTint( targetColor, Duration ),
 
-			TweenType.ShakeLocation => GameObject.TweenShakeLocation( Duration, SLStrength ),
-			TweenType.ShakeRotation => GameObject.TweenShakeRotation( Duration, SRStrength ),
-			TweenType.ShakeScale => GameObject.TweenShakeScale( Duration, SSStrength ),
+			TweenType.ShakeLocation => GameObject.TweenShakeLocation( Duration, Strength ),
+			TweenType.ShakeRotation => GameObject.TweenShakeRotation( Duration, Strength ),
+			TweenType.ShakeScale => GameObject.TweenShakeScale( Duration, Strength ),
+
+			TweenType.InCircle => GameObject.TweenInCircle( Duration, Axis, Range, Speed, Snapping ),
+			TweenType.Spiral => GameObject.TweenSpiral( Duration, Axis, Speed, Frequency ),
 
 			_ => null
 		};
 
-		//Tween failed.
 		if ( t == null ) return null;
 
-		if ( UseCurve )
+		if ( UseCurve ) t.WithCurve( TweenCurve );
+		else t.SetEase( Easing );
+
+		t.Target = this.GameObject;
+		t.SetDelay( Delay );
+		t.LoopMode = LoopMode;
+
+		if ( !string.IsNullOrEmpty( TweenID ) )
 		{
-			t.WithCurve( TweenCurve );
-		}
-		else
-		{
-			t.SetEase( Easing );
+			t.SetId( TweenID );
 		}
 
 		return t;
@@ -255,5 +333,7 @@ public enum TweenType
 	Tint,
 	ShakeLocation,
 	ShakeRotation, 
-	ShakeScale
+	ShakeScale,
+	Spiral,
+	InCircle
 }

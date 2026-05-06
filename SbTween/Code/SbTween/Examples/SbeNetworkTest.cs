@@ -13,7 +13,7 @@ public sealed class SbeNetworkTest : Component
 	{
 		if ( !IsProxy )
 		{
-			this.TweenMove( location, 1 ).SetEase( EaseType.Linear ).SetLoops( -1, true ).Play();
+			this.TweenMove( location, 1 ).SetEase( EaseType.Linear ).SetLoops( -1, LoopType.YoYo ).Play();
 		}
 	}
 }

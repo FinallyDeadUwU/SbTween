@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sbtween.editor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f9fff3e0096a7fa927784c8e695737f3f5b519f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6932d1a44fd7aa6b66bdb69511cdd233e62bedcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("sbtween.editor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sbtween.editor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
