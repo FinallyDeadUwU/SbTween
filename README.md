@@ -33,6 +33,7 @@ Shoutouts:
 Braxen (TweenManager) for inspiration.
 DoTween, GDTween for inspiration.
 Robert Penner for easing equations.
+Enzo for helping.
 
 Future:
 Tweening Component (instead of writing code, you can play or setup tweens in inspector)
