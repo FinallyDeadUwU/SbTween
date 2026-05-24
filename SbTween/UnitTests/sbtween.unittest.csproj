@@ -57,7 +57,6 @@
 		<ProjectReference Include="../../../../../../../../Program Files (x86)/Steam/steamapps/common/sbox/addons/tools/Code/Base Editor Library.csproj" />
 		<ProjectReference Include="../../../../../../../../Program Files (x86)/Steam/steamapps/common/sbox/editor/MovieMaker/Code/moviemaker.csproj" />
 		<ProjectReference Include="../Code/sbtween.csproj" />
-		<ProjectReference Include="../Editor/sbtween.editor.csproj" />
 		<ProjectReference Include="../../../../../../../../Program Files (x86)/Steam/steamapps/common/sbox/editor/ShaderGraph/Code/shadergraph.csproj" />
 	</ItemGroup>
 

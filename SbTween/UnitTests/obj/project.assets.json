@@ -461,25 +461,6 @@
           "bin/placeholder/sbtween.dll": {}
         }
       },
-      "sbtween.editor/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "Base Editor Library": "1.0.0",
-          "actiongraph": "1.0.0",
-          "dooeditor": "1.0.0",
-          "hammer": "1.0.0",
-          "moviemaker": "1.0.0",
-          "sbtween": "1.0.0",
-          "shadergraph": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/sbtween.editor.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/sbtween.editor.dll": {}
-        }
-      },
       "shadergraph/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -1104,11 +1085,6 @@
       "path": "../Code/sbtween.csproj",
       "msbuildProject": "../Code/sbtween.csproj"
     },
-    "sbtween.editor/1.0.0": {
-      "type": "project",
-      "path": "../Editor/sbtween.editor.csproj",
-      "msbuildProject": "../Editor/sbtween.editor.csproj"
-    },
     "shadergraph/1.0.0": {
       "type": "project",
       "path": "../../../../../../../../Program Files (x86)/Steam/steamapps/common/sbox/editor/ShaderGraph/Code/shadergraph.csproj",
@@ -1127,7 +1103,6 @@
       "hammer >= 1.0.0",
       "moviemaker >= 1.0.0",
       "sbtween >= 1.0.0",
-      "sbtween.editor >= 1.0.0",
       "shadergraph >= 1.0.0"
     ]
   },
@@ -1138,11 +1113,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\sbtween.unittest.csproj",
+      "projectUniqueName": "C:\\Users\\Filip\\Documents\\s&box projects\\die_keller\\Libraries\\resync.sbtween\\UnitTests\\sbtween.unittest.csproj",
       "projectName": "sbtween.unittest",
-      "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\sbtween.unittest.csproj",
+      "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\die_keller\\Libraries\\resync.sbtween\\UnitTests\\sbtween.unittest.csproj",
       "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\filip\\documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\obj\\",
+      "outputPath": "C:\\Users\\Filip\\Documents\\s&box projects\\die_keller\\Libraries\\resync.sbtween\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1182,11 +1157,8 @@
             "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\editor\\ShaderGraph\\Code\\shadergraph.csproj": {
               "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\editor\\ShaderGraph\\Code\\shadergraph.csproj"
             },
-            "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Code\\sbtween.csproj": {
-              "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Code\\sbtween.csproj"
-            },
-            "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Editor\\sbtween.editor.csproj": {
-              "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\Editor\\sbtween.editor.csproj"
+            "C:\\Users\\Filip\\Documents\\s&box projects\\die_keller\\Libraries\\resync.sbtween\\Code\\sbtween.csproj": {
+              "projectPath": "C:\\Users\\Filip\\Documents\\s&box projects\\die_keller\\Libraries\\resync.sbtween\\Code\\sbtween.csproj"
             }
           }
         }
@@ -1236,7 +1208,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

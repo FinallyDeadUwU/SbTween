@@ -1,0 +1,2 @@
+C:\Program Files (x86)\Steam\steamapps\common\sbox\addons\base\code\obj\Debug\staticwebassets.build.json
+C:\Program Files (x86)\Steam\steamapps\common\sbox\addons\base\code\obj\Debug\staticwebassets.build.json

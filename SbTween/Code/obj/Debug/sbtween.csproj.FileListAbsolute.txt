@@ -1,0 +1,36 @@
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\Base Library.staticwebassets.endpoints.json
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\Properties\launchSettings.json
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\sbtween.staticwebassets.endpoints.json
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\sbtween.xml
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\sbtween.deps.json
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\sbtween.dll
+C:\Program Files (x86)\Steam\steamapps\common\sbox\.vs\output\sbtween.pdb
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\EmbeddedAttribute.cs
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\ValidatableTypeAttribute.cs
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.csproj.AssemblyReference.cache
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\rpswa.dswa.cache.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.AssemblyInfoInputs.cache
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.AssemblyInfo.cs
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\rjimswa.dswa.cache.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\rjsmrazor.dswa.cache.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\rjsmcshtml.dswa.cache.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\scopedcss\bundle\sbtween.styles.css
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets.build.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets.build.json.cache
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets.development.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets.build.endpoints.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\swae.build.ex.cache
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets\msbuild.sbtween.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets\msbuild.sbtween.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets\msbuild.build.sbtween.props
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets\msbuild.buildMultiTargeting.sbtween.props
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets\msbuild.buildTransitive.sbtween.props
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets.pack.json
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\staticwebassets.upToDateCheck.txt
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.csproj.Up2Date
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.dll
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\refint\sbtween.dll
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\sbtween.pdb
+C:\Users\Filip\Documents\s&box projects\die_keller\Libraries\resync.sbtween\Code\obj\Debug\ref\sbtween.dll

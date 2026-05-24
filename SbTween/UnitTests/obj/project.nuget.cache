@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "niyiQ4JhhV0=",
+  "dgSpecHash": "ngrDo1rDIUc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Filip\\Documents\\s&box projects\\s_box_defense\\Libraries\\SbTween\\UnitTests\\sbtween.unittest.csproj",
+  "projectFilePath": "C:\\Users\\Filip\\Documents\\s&box projects\\die_keller\\Libraries\\resync.sbtween\\UnitTests\\sbtween.unittest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Filip\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Filip\\.nuget\\packages\\microsoft.codecoverage\\17.7.2\\microsoft.codecoverage.17.7.2.nupkg.sha512",

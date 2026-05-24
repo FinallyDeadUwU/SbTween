@@ -15,7 +15,11 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 			if ( activeScene == null ) return null;
 
 			var found = activeScene.GetAllComponents<TweenManager>().FirstOrDefault();
-			if ( found.IsValid() ) return found;
+			if ( found.IsValid() )
+			{
+				_instance = found;
+				return found;
+			}
 
 			var go = activeScene.CreateObject();
 			go.Name = "SbTween_Manager";
@@ -25,6 +29,9 @@ public sealed class TweenManager : Component, Component.ExecuteInEditor
 			return _instance;
 		}
 	}
+
+	// Shoutout Enzo for this fix
+	public static TweenManager Current => _instance != null && _instance.IsValid ? _instance : null;
 
 	private readonly List<BaseTween> _activeTweens = new();
 	private readonly List<TweenSequence> _activeSequences = new();

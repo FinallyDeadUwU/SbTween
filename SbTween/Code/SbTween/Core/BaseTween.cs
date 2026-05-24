@@ -49,16 +49,6 @@ public class BaseTween
 		Id = id;
 		return this;
 	}
-	public void Stop()
-	{
-		IsFinished = true;
-		IsPaused = true;
-
-		if ( TweenManager.Instance.IsValid() )
-		{
-			TweenManager.Instance.RemoveTween( this );
-		}
-	}
 	protected float GetEasedProgress( float p )
 	{
 		return TimingFunction != null ? TimingFunction( p ) : p;
@@ -133,6 +123,8 @@ public class BaseTween
 	public BaseTween OnStart( Action a ) { _onStart = a; return this; }
 	public BaseTween OnUpdate( Action<float> a ) { _onUpdate = a; return this; }
 	public BaseTween OnComplete( Action a ) { _onComplete = a; return this; }
+	public BaseTween OnLoop( Action a ) { _onLoop = a; return this; }
+
 	public BaseTween WithCurve( Curve curve )
 	{
 		TimingFunction = t => curve.Evaluate( t );
@@ -146,9 +138,9 @@ public class BaseTween
 		IsPaused = false;
 		IsFinished = false;
 
-		if ( TweenManager.Instance.IsValid() )
+		if ( TweenManager.Current is { } Tweener )
 		{
-			TweenManager.Instance.AddTween( this );
+			Tweener.AddTween( this );
 		}
 	}
 	public void Kill() => IsFinished = true;
@@ -159,6 +151,17 @@ public class BaseTween
 		IsFinished = false;
 		IsPaused = true;
 		_hasStarted = false;
+	}
+
+	public void Stop()
+	{
+		IsFinished = true;
+		IsPaused = true;
+
+		if ( TweenManager.Current is { } Tweener )
+		{
+			Tweener.RemoveTween( this );
+		}
 	}
 }
 
