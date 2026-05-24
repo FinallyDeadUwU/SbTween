@@ -57,6 +57,16 @@ public static class LightExtensions
 			.OnUpdate( p => light.Attenuation = MathX.Lerp( start, target, p ) ) );
 	}
 
+	public static BaseTween TweenRadius( this PointLight light, float target, float duration )
+	{
+		if ( !light.IsValid() ) return null;
+
+		float start = light.Radius;
+		return TweenManager.Instance.AddTween( new BaseTween( duration )
+			.OnStart( () => start = light.Radius )
+			.OnUpdate( p => light.Radius = MathX.Lerp( start, target, p ) ) );
+	}
+
 	public static BaseTween TweenAttenuation( this SpotLight light, float target, float duration )
 	{
 		if ( !light.IsValid() ) return null;
