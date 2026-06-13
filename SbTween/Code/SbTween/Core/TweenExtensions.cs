@@ -42,6 +42,8 @@ public static class TweenExtensions
 	// TWEENS
 	public static BaseTween TweenMove( this Component self, Vector3 target, float duration ) => self.GameObject.TweenMove( target, duration );
 	public static BaseTween TweenMoveLocal( this Component self, Vector3 target, float duration ) => self.GameObject.TweenMoveLocal( target, duration );
+	public static BaseTween TweenMove2D( this Component self, Vector2 target, float duration ) => self.GameObject.TweenMove2D( target, duration );
+	public static BaseTween TweenMoveLocal2D( this Component self, Vector2 target, float duration ) => self.GameObject.TweenMoveLocal2D( target, duration );
 	public static BaseTween TweenRotateLocal( this Component self, Rotation target, float duration ) => self.GameObject.TweenRotateLocal( target, duration );
 	public static BaseTween TweenRotate( this Component self, Rotation target, float duration ) => self.GameObject.TweenRotate( target, duration );
 	public static BaseTween TweenScale( this Component self, Vector3 target, float duration ) => self.GameObject.TweenScale( target, duration );
@@ -101,6 +103,41 @@ public static class TweenExtensions
 		return TweenManager.Instance.AddTween( tween
 			.OnStart( () => start = obj.LocalScale )
 			.OnUpdate( p => obj.LocalScale = Vector3.Lerp( start, target, p ) ) );
+	}
+	
+	// 2D VECTOR
+	public static BaseTween TweenMove2D( this GameObject obj, Vector2 target, float duration )
+	{
+		Vector2 start = new Vector2( obj.WorldPosition.x, obj.WorldPosition.y );
+		float originalZ = obj.WorldPosition.z;
+		var tween = new BaseTween( duration );
+		tween.Target = obj;
+		return TweenManager.Instance.AddTween( tween
+			.OnStart( () => {
+				start = new Vector2( obj.WorldPosition.x, obj.WorldPosition.y );
+				originalZ = obj.WorldPosition.z;
+			} )
+			.OnUpdate( p => {
+				Vector2 current2D = Vector2.Lerp( start, target, p );
+				obj.WorldPosition = new Vector3( current2D.x, current2D.y, originalZ );
+			} ) );
+	}
+
+	public static BaseTween TweenMoveLocal2D( this GameObject obj, Vector2 target, float duration )
+	{
+		Vector2 start = new Vector2( obj.LocalPosition.x, obj.LocalPosition.y );
+		float originalZ = obj.LocalPosition.z;
+		var tween = new BaseTween( duration );
+		tween.Target = obj;
+		return TweenManager.Instance.AddTween( tween
+			.OnStart( () => {
+				start = new Vector2( obj.LocalPosition.x, obj.LocalPosition.y );
+				originalZ = obj.LocalPosition.z;
+			} )
+			.OnUpdate( p => {
+				Vector2 current2D = Vector2.Lerp( start, target, p );
+				obj.LocalPosition = new Vector3( current2D.x, current2D.y, originalZ );
+			} ) );
 	}
 
 	// RENDER

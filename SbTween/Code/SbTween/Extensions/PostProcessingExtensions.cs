@@ -5,7 +5,7 @@ namespace SbTween;
 
 public static class PostProcessingExtensions
 {
-	// ── FilmGrain ──────────────────────────────────────────────────────────
+	// FilmGrain
 
 	public static BaseTween TweenIntensity( this FilmGrain pp, float target, float duration )
 	{
@@ -25,7 +25,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.Response = MathX.Lerp( start, target, p ) ) );
 	}
 
-	// ── Bloom ──────────────────────────────────────────────────────────────
+	// Bloom
 
 	public static BaseTween TweenStrength( this Bloom pp, float target, float duration )
 	{
@@ -63,7 +63,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.Tint = Color.Lerp( start, target, p ) ) );
 	}
 
-	// ── Blur ──────────────────────────────────────────────────────────────
+	// Blur
 
 	public static BaseTween TweenSize( this Blur pp, float target, float duration )
 	{
@@ -74,7 +74,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.Size = MathX.Lerp( start, target, p ) ) );
 	}
 
-	// ── ChromaticAberration ────────────────────────────────────────────────
+	// ChromaticAberration 
 
 	public static BaseTween TweenScale( this ChromaticAberration pp, float target, float duration )
 	{
@@ -94,7 +94,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.Offset = Vector3.Lerp( start, target, p ) ) );
 	}
 
-	// ── ColorAdjustments ──────────────────────────────────────────────────
+	// ColorAdjustments
 
 	public static BaseTween TweenBlend( this ColorAdjustments pp, float target, float duration )
 	{
@@ -141,7 +141,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.Contrast = MathX.Lerp( start, target, p ) ) );
 	}
 
-	// ── Vignette ───────────────────────────────────────────────────────────
+	// Vignette
 
 	public static BaseTween TweenIntensity( this Vignette pp, float target, float duration )
 	{
@@ -188,7 +188,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.Center = Vector2.Lerp( start, target, p ) ) );
 	}
 
-	// ── DepthOfField ───────────────────────────────────────────────────────
+	// DepthOfField
 
 	public static BaseTween TweenBlurSize( this DepthOfField pp, float target, float duration )
 	{
@@ -217,7 +217,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.FocusRange = MathX.Lerp( start, target, p ) ) );
 	}
 
-	// ── Sharpen ───────────────────────────────────────────────────────────
+	// Sharpen 
 
 	public static BaseTween TweenSharpen( this Sharpen pp, float target, float duration )
 	{
@@ -236,7 +236,7 @@ public static class PostProcessingExtensions
 			.OnUpdate( p => pp.TexelSize = MathX.Lerp( start, target, p ) ) );
 	}
 
-	// ── Pixelate ──────────────────────────────────────────────────────────
+	// Pixelate
 
 	public static BaseTween TweenScale( this Pixelate pp, float target, float duration )
 	{

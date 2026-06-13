@@ -1,7 +1,10 @@
 using System;
+using System.Text.Json.Serialization;
+using Sandbox;
 
 namespace SbTween;
 
+[JsonConverter(typeof(EaseTypeConverter))]
 public enum EaseType
 {
 	Linear,

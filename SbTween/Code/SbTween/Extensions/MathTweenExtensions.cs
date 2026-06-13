@@ -59,4 +59,57 @@ public static class MathTweenExtensions
 			} )
 		);
 	}
+	
+	public static BaseTween TweenPunchFloat( this GameObject obj, float v, float amplitude, float duration, int vibrations = 5, float elasticity = 1f, Action<float> setter = null )
+	{
+		var tween = new BaseTween( duration );
+		tween.Target = obj;
+
+		return TweenManager.Instance.AddTween( tween
+			.OnUpdate( p =>
+			{
+				if ( !obj.IsValid() ) return;
+				if ( p >= 1.0f )
+				{
+					setter?.Invoke( v );
+					return;
+				}
+				
+				float decay = MathF.Pow( 1f - p, elasticity * 3f );
+
+				float omega = vibrations * MathF.PI * 2f;
+				float oscillation = MathF.Sin( p * omega );
+
+				float currentOffset = amplitude * oscillation * decay;
+
+				setter?.Invoke( v + currentOffset );
+			} )
+			.OnComplete( () => setter?.Invoke( v ) )
+		);
+	}
+	
+	public static BaseTween TweenShakeFloat( this GameObject obj, float baseline, float strength, float duration, Action<float> setter = null )
+	{
+		var tween = new BaseTween( duration );
+		tween.Target = obj;
+
+		return TweenManager.Instance.AddTween( tween
+			.OnUpdate( p =>
+			{
+				if ( !obj.IsValid() ) return;
+				if ( p >= 1.0f )
+				{
+					setter?.Invoke( baseline );
+					return;
+				}
+
+				float currentStrength = strength * (1.0f - p);
+             
+				float randomOffset = Game.Random.Float( -currentStrength, currentStrength );
+
+				setter?.Invoke( baseline + randomOffset );
+			} )
+			.OnComplete( () => setter?.Invoke( baseline ) )
+		);
+	}
 }
