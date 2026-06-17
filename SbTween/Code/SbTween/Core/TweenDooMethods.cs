@@ -431,6 +431,27 @@ public static class SbTweenDooMethods
         var tween = text.TweenFontWeight( target, duration );
         SetupTween( tween, id, (EaseType)Math.Clamp( ease, 0, 9 ), delay, loops, (LoopType)Math.Clamp( loopType, 0, 2 ) );
     }
+    
+    //AUDIO
+    [Doo.Method( "Tween Sound Volume", CategoryName = "SbTween/Audio" )]
+    public static void TweenVolumeDoo( SoundPointComponent sound, float target, float duration = 1f, string id = "", int ease = (int)EaseType.OutCubic, float delay = 0f, int loops = 0, int loopType = (int)LoopType.Restart )
+    {
+	    if ( !sound.IsValid() ) return;
+	    var tween = sound.TweenVolume( target, duration );
+        
+	    tween.SetDelay( delay )
+		    .SetLoops( loops, (LoopType)Math.Clamp( loopType, 0, 2 ) )
+		    .SetEase( (EaseType)Math.Clamp( ease, 0, 9 ) );
+	    SetupTween( tween, id, (EaseType)Math.Clamp( ease, 0, 9 ), delay, loops, (LoopType)Math.Clamp( loopType, 0, 2 ) );
+    }
+    
+    [Doo.Method( "Tween Sound Pitch", CategoryName = "SbTween/Audio" )]
+    public static void TweenPitchDoo( SoundPointComponent sound, float target, float duration = 1f, string id = "", int ease = (int)EaseType.OutCubic, float delay = 0f, int loops = 0, int loopType = (int)LoopType.Restart )
+    {
+	    if ( !sound.IsValid() ) return;
+	    var tween = sound.TweenPitch( target, duration );
+	    SetupTween( tween, id, (EaseType)Math.Clamp( ease, 0, 9 ), delay, loops, (LoopType)Math.Clamp( loopType, 0, 2 ) );
+    }
 
     // TWEEN SETUP
 

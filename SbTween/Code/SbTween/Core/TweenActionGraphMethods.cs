@@ -530,10 +530,43 @@ public static class SbTweenActionGraphMethods
        var tween = obj.TweenShakeScale( duration, strength );
        ExecuteGraphTween( tween, id, EaseType.Linear, 0f, 0, LoopType.Restart, onStart, onUpdate, onLoop, onComplete );
     }
+    
+    // AUDIO
+    [ActionGraphNode( "sbtween.audio.volume" ), Category( "SbTween/Audio" )]
+    public static void TweenVolume( 
+	    SoundPointComponent sound, float target, float duration, string id = null,
+	    Action onStart = null, Action onLoop = null, Action onComplete = null )
+    {
+	    if ( !sound.IsValid() ) return;
+	    var tween = sound.TweenVolume( target, duration );
+       
+	    if ( !string.IsNullOrEmpty( id ) ) tween.SetId( id );
+	    else tween.SetId( "AudioVolume" );
+       
+	    if ( onStart != null )    tween.OnStart( onStart );
+	    if ( onLoop != null )     tween.OnLoop( onLoop );
+	    if ( onComplete != null ) tween.OnComplete( onComplete );
 
-    // ==========================================
-    // INTERNAL LIFECYCLE ENGINE DRIVER
-    // ==========================================
+	    tween.Play();
+    }
+    
+    [ActionGraphNode( "sbtween.audio.pitch" ), Category( "SbTween/Audio" )]
+    public static void TweenPitch( 
+	    SoundPointComponent sound, float target, float duration, string id = null,
+	    Action onStart = null, Action onLoop = null, Action onComplete = null )
+    {
+	    if ( !sound.IsValid() ) return;
+	    var tween = sound.TweenPitch( target, duration );
+       
+	    if ( !string.IsNullOrEmpty( id ) ) tween.SetId( id );
+	    else tween.SetId( "AudioPitch" );
+       
+	    if ( onStart != null )    tween.OnStart( onStart );
+	    if ( onLoop != null )     tween.OnLoop( onLoop );
+	    if ( onComplete != null ) tween.OnComplete( onComplete );
+
+	    tween.Play();
+    }
 
     private static void ExecuteGraphTween( 
         BaseTween tween, string id, EaseType ease, float delay, int loops, LoopType loopMode,
@@ -541,7 +574,6 @@ public static class SbTweenActionGraphMethods
     {
         if ( tween == null ) return;
 
-        // 1. Core settings configuration
         tween.SetDelay( delay )
              .SetLoops( loops, loopMode )
              .SetEase( ease );
